@@ -1,0 +1,40 @@
+insightloop-root/
+├── apps/
+│   ├── web/                     # Frontend (Next.js + shadcn/ui)
+│   │   ├── app/                 # App Router 主體 (pages、layout、API Route for web only)
+│   │   ├── components/          # 公用 React 元件 (NoteEditor、UI wrappers…)
+│   │   ├── lib/                 # 前端工具函式 (clerk client init, API clients…)
+│   │   ├── public/              # 靜態資源 (圖示、fonts、favicon…)
+│   │   ├── styles/              # 全域或共享 CSS 檔（globals.css 等）
+│   │   ├── package.json         # 前端獨立依賴
+│   │   └── tsconfig.json        # 前端 TypeScript 針對性設定
+│   │
+│   └── api/                     # Backend (Next.js API / tRPC / Node handlers)
+│       ├── src/
+│       │   ├── server/
+│       │   │   ├── api/         # tRPC router 定義 (noteRouter、uploadRouter…)
+│       │   │   ├── lib/         # 後端工具函式 (openai wrapper, embedding, rag…)
+│       │   │   ├── prisma.ts    # Prisma client 初始化
+│       │   │   ├── trpc.ts      # tRPC Context & 中介層 (protectedProcedure)
+│       │   │   └── middleware/  # Clerk/Next.js middleware（如 authMiddleware）
+│       │   └── package.json     # Backend 獨立依賴
+│       └── tsconfig.json        # 後端 TypeScript 設定
+│
+├── prisma/                      # Prisma Schema + Migration
+│   ├── schema.prisma           
+│   └── migrations/              # 資料庫遷移記錄
+│
+├── components/                  # 可被多端(前後端)共用的 React/TS 元件 (選擇性)
+│
+├── lib/                         # 共享工具函式 (若有多個 app 共用)
+│
+├── docs/                        # 專案文件 (MVP 計畫書、架構圖、設計文件…)
+│
+├── .github/
+│   └── workflows/               # GitHub Actions CI/CD
+│
+├── vercel.json                  # Vercel 部署設定
+├── railway.json                 # Railway 部署設定
+├── .eslintrc.json               # ESLint 全域設定
+├── pnpm-workspace.yaml          # Monorepo workspace 配置
+└── package.json                 # 根目錄依賴 (如 husky, lint-staged, shared scripts)

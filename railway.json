@@ -1,0 +1,15 @@
+{
+    "services": [
+      {
+        "name": "web",
+        "root": "apps/web",
+        "startCommand": "pnpm dev"
+      },
+      {
+        "name": "api",
+        "root": "apps/api",
+        "startCommand": "pnpm start"
+      }
+    ]
+  }
+  

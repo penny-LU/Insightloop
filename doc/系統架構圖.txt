@@ -1,0 +1,56 @@
+graph TD
+    subgraph Client (Frontend - Next.js)
+        A1[UI: 筆記編輯器]
+        A2[UI: 筆記列表 + 搜尋]
+        A3[UI: 知識圖譜視覺化]
+        A4[UI: 登入/註冊]
+        A5[UI: Chat with Notes]
+    end
+
+    subgraph Backend API Server (Next.js API Routes / tRPC)
+        B1[Notes CRUD API]
+        B2[Auth Session Middleware]
+        B3[Semantic Search API]
+        B4[AI Summary API]
+        B5[Question Generator API]
+        B6[Vector Embedding Handler]
+    end
+
+    subgraph Database Layer
+        C1[(PostgreSQL)]
+        C2[(pgvector)]
+    end
+
+    subgraph AI Services
+        D1[[OpenAI API / Claude]]
+        D2[[LangChain / LlamaIndex]]
+        D3[[Embedding API]]
+    end
+
+    subgraph Static Deployment
+        E1[Vercel (Frontend)]
+        E2[Railway / Supabase (Backend + DB)]
+    end
+
+    %% Frontend → Backend
+    A1 --> B1
+    A2 --> B1
+    A2 --> B3
+    A3 --> B3
+    A4 --> B2
+    A5 --> B3
+
+    %% Backend → AI + DB
+    B1 --> C1
+    B3 --> C2
+    B3 --> D2
+    B4 --> D2
+    B5 --> D2
+    B6 --> D3
+    D2 --> C1
+    D2 --> C2
+
+    %% Hosting
+    A1 --> E1
+    B1 --> E2
+    C1 --> E2
