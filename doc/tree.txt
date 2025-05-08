@@ -38,3 +38,38 @@ insightloop-root/
 ├── .eslintrc.json               # ESLint 全域設定
 ├── pnpm-workspace.yaml          # Monorepo workspace 配置
 └── package.json                 # 根目錄依賴 (如 husky, lint-staged, shared scripts)
+
+v1
+insightloop/
+├── apps/
+│   └── web/
+│       ├── app/
+│       │   ├── layout.tsx      # 全局 Layout（載入 globals.css）
+│       │   └── page.tsx        # 首頁（渲染 NoteEditor）
+│       ├── components/
+│       │   └── NoteEditor.tsx  # 客戶端筆記編輯元件
+│       ├── public/             # 靜態資源 (SVG 圖示…)
+│       │   ├── file.svg
+│       │   ├── globe.svg
+│       │   └── window.svg
+│       ├── styles/
+│       │   └── globals.css     # Tailwind + 全局 CSS 變數
+│       ├── package.json        # apps/web 專案依賴與啟動腳本
+│       ├── tsconfig.json       # 前端 TypeScript 設定
+│       ├── tailwind.config.ts  # TailwindCSS 掃描路徑與設定
+│       └── postcss.config.js   # PostCSS 設定
+├── packages/
+│   └── ui/                     # 共用 UI 元件庫 (Card, Button…)
+│       ├── badge.tsx
+│       ├── button.tsx
+│       ├── card.tsx
+│       ├── input.tsx
+│       └── textarea.tsx
+├── next.config.mjs             # Next.js 配置（啟用 App Router）
+├── package.json                # Monorepo 根依賴與腳本
+├── pnpm-workspace.yaml         # PNPM 工作區設定
+├── tsconfig.json               # 根目錄 TypeScript 設定 (paths, baseUrl)
+├── tailwind.config.ts          # Monorepo 共用 Tailwind 設定（可選）
+├── postcss.config.js           # 根目錄 PostCSS 設定
+└── README.md                   # 專案說明
+

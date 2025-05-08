@@ -1,0 +1,30 @@
+{
+  "extends": "../../tsconfig.json", // 繼承根目錄設定
+  "compilerOptions": {
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "noEmit": true,
+    "paths": {
+      "@/components/*": [
+        "components/*"
+      ],
+      "@/styles/*": [
+        "styles/*"
+      ],
+      "@/ui/*": [
+        "../../components/ui/*"
+      ],
+      "@/lib/*": [
+        "../../lib/*"
+      ]
+      
+      
+    }
+  },
+  "include": [
+    "app",
+    "components",
+    "styles",
+    ".next/types/**/*.ts"
+  ]
+}

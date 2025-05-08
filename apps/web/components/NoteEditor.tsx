@@ -1,9 +1,11 @@
+"use client";
+
 import { useState, FormEvent } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/ui/card";
+import { Input } from "@/ui/input";
+import { Textarea } from "@/ui/textarea";
+import { Button } from "@/ui/button";
+import { Badge } from "@/ui/badge";
 import { Sparkles, Send } from "lucide-react";
 
 const NoteEditor: React.FC = () => {
@@ -30,8 +32,6 @@ const NoteEditor: React.FC = () => {
       alert("請填寫標題和內容！");
       return;
     }
-
-    // TODO: 呼叫 tRPC createNote
     console.log("Note submitted:", { title, content, tags });
   };
 

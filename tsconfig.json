@@ -4,15 +4,20 @@
     "lib": [ "dom", "dom.iterable", "esnext" ],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+        // ────────────────────────────────────────────────────────────
+    // 嚴格型別檢查
+    // ────────────────────────────────────────────────────────────
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
     "plugins": [
       {
         "name": "next"
@@ -20,11 +25,15 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": [ "*" ],
-      "@web/*": [ "apps/web/*" ],
-      "@api/*": [ "apps/api/src/server/*" ],
-      "@components/*": [ "apps/web/components/*" ],
-      "@lib/*": [ "apps/web/lib/*" ]
+      "@/*": [ "./*" ],
+      "@/web/*": [ "apps/web/*" ],
+      "@/api/*": [ "apps/api/src/server/*" ],
+      "@/components/*": [ "apps/web/components/*" ],
+      "@/lib/*": [ "lib/*" ],
+      // API / lib
+      "@/styles/*":     ["apps/web/styles/*"],
+      // 共用 UI library
+      "@/ui/*":         ["components/ui/*"],
     }
   },
   "include": [
@@ -34,7 +43,8 @@
     ".next/types/**/*.ts",
     "apps/web/**/*",
     "apps/api/**/*",
-    "prisma/**/*"
+    "prisma/**/*",
+    "packages/ui/**/*"
   ],
   "exclude": [ "node_modules", ".next", "dist" ]
 }
