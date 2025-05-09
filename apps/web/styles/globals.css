@@ -3,6 +3,9 @@
 @tailwind utilities;
 @config "../tailwind.config.cjs"; 
 
+/* CodeMirror 基礎樣式 */
+@import "https://unpkg.com/codemirror@6/theme/nord.css";
+
 /* 基本變數設定 */
 :root {
   --radius: 0.625rem;

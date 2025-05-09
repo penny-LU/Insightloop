@@ -9,7 +9,7 @@ module.exports = {
     "../../lib/**/*.{ts,tsx,js,jsx}",
     "../../node_modules/@shadcn/ui/**/*.{js,ts,tsx}",
     "./pages/**/*.{ts,tsx}",
-    "./styles/**/*.{ts,tsx,css}",
+    "./styles/**/*.{css}",
   ],
   theme: {
     extend: {

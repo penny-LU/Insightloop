@@ -1,68 +1,62 @@
-import Image from "next/image";
-import NoteEditor from "@/components/NoteEditor";
+"use client";
 
-export default function Home() {
+import * as React from "react";
+// import NoteEditor from "@/components/NoteEditor";
+import { Sidebar } from "@/components/Sidebar";
+import { Toolbar } from "@/components/Toolbar";
+import { Editor } from "@/components/Editor";
+import { Preview } from "@/components/Preview";
+
+export default function HomePage() {
+  const [content, setContent] = React.useState("");
+  const editorRef = React.useRef<HTMLDivElement>(null);
+  const previewRef = React.useRef<HTMLDivElement>(null);
+
+  // Scroll Sync
+  React.useEffect(() => {
+    if (!editorRef.current || !previewRef.current) return;
+    const ed = editorRef.current, pr = previewRef.current;
+    const sync = () => {
+      const ratio = ed.scrollTop / (ed.scrollHeight - ed.clientHeight);
+      pr.scrollTop = ratio * (pr.scrollHeight - pr.clientHeight);
+    };
+    ed.addEventListener("scroll", sync);
+    return () => ed.removeEventListener("scroll", sync);
+  }, []);
+
+  const handleSave = () => {
+    // TODO: tRPC or fetch POST
+    console.log("Save content:", content);
+  };
+  const handleSync = () => { /* 呼叫同步 API */ };
+  const handleSummary = async () => {
+    // TODO: 呼叫後端 AI 摘要 API
+    const res = await fetch("/api/summary", {
+      method: "POST",
+      body: JSON.stringify({ text: content }),
+    });
+    const { summary } = await res.json();
+    alert(summary);
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      
-      {/* Header區域：可以新增頁面標題 */}
-      <header className="text-center">
-        <h1 className="text-3xl font-semibold">筆記編輯器</h1>
-      </header>
-      
-      {/* Main區域：顯示NoteEditor */}
-      <main className="flex justify-center items-start p-8 w-full max-w-3xl">
-        <NoteEditor />
-      </main>
-
-      {/* Footer區域：保持不變，包含鏈接 */}
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+    <div className="flex h-screen">
+      <Sidebar />
+      <div className="flex-1 flex flex-col">
+        <Toolbar
+          onSave={handleSave}
+          onSync={handleSync}
+          onSummary={handleSummary}
+        />
+        <div className="flex flex-1">
+          <Editor
+            value={content}
+            onChange={setContent}
+            editorRef={editorRef}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <Preview content={content} ref={previewRef} />
+        </div>
+      </div>
     </div>
   );
 }
